@@ -32,7 +32,7 @@ module Protokoll
 
       # Signing before_create
       before_create do |record|
-        if record[column].blank? || (record[column] == self.send("preview_next_#{options[:column]}")
+        if record[column].blank? || (record[column] == self.send("preview_next_#{options[:column]}"))
           record[column] = Counter.next(self, options)
         end
       end
