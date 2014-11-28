@@ -29,10 +29,16 @@ module Protokoll
         Counter.preview_next(self, options)
       end
 
+      # preview before_validation if column is blank
+      before_validation do |record|
+        if record[column].blank?
+          record[column] = Counter.preview_next(self, options)
+        end
+      end
 
       # Signing before_create
       before_create do |record|
-        if record[column].blank? || (record[column] == self.send("preview_next_#{options[:column]}"))
+        if record[column].blank? || ( record[column] == Counter.preview_next(self, options) )
           record[column] = Counter.next(self, options)
         end
       end
