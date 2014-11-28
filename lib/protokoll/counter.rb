@@ -8,10 +8,20 @@ module Protokoll
       element.counter = options[:start] if outdated?(element, options) || element.counter == 0
       element.counter += 1
 
+      element
+    end
+
+    def self.preview_next(object, options)
+      element = self.next(object, options)
+
+      Formater.new.format(element.counter, options)
+    end
+
+    def self.next(object, options)
+      element = compute_next(object, options)
+
       element.touch unless element.changed?
       element.save! if element.changed?
-
-      element.save!
 
       Formater.new.format(element.counter, options)
     end
