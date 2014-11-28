@@ -25,6 +25,10 @@ module Protokoll
       send :define_method, "reserve_#{options[:column]}!".to_sym do
         self[column] = Counter.next(self, options)
       end
+      send :define_method, "preview_next_#{options[:column]}".to_sym do
+        Counter.preview_next(self, options)
+      end
+
 
       # Signing before_create
       before_create do |record|
