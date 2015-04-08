@@ -16,7 +16,7 @@ module Protokoll
                   :column        => column,
                   :start         => 0,
                   :scope_by      => nil,
-                  :class_name    => nil }
+                  :model_name    => nil }
 
       options.merge!(_options)
       raise ArgumentError.new("pattern can't be nil!") if options[:pattern].nil?
