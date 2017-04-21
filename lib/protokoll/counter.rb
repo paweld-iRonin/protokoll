@@ -2,7 +2,7 @@ require 'active_record'
 
 module Protokoll
   class Counter
-    def self.next(object, options)
+    def self.compute_next(object, options)
       element = Models::CustomAutoIncrement.find_or_create_by(build_attrs(object, options))
 
       element.counter = options[:start] if outdated?(element, options) || element.counter == 0
@@ -12,7 +12,7 @@ module Protokoll
     end
 
     def self.preview_next(object, options)
-      element = self.next(object, options)
+      element = self.compute_next(object, options)
 
       Formater.new.format(element.counter, options)
     end
