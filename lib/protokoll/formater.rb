@@ -41,7 +41,7 @@ module Protokoll
 
     def sufix(pattern)
       sufx = extract_sufix(pattern)
-      expand_times(sufx.to_s)
+      expand_times(sufx.to_s.dup)
     end
 
     def format_counter(zeros, value)
